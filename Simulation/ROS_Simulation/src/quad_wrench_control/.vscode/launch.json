@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug hover_test_node",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/quad_wrench_control/quad_wrench_control/hover_test_node.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/install/quad_wrench_control/lib/python3.10/site-packages:${workspaceFolder}/install:${env:PYTHONPATH}"
+      },
+      "args": [
+        "--ros-args",
+        "-p", "hover_thrust:=0.0",
+        "-p", "wrench_topic:=/world/quad_world/wrench/persistent"
+      ]
+    }
+  ]
+}

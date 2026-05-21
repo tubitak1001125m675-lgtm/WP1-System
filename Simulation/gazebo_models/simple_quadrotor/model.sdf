@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="simple_quadrotor">
+    <pose>0 0 1 0 0 0</pose>
+    <static>false</static>
+
+    <plugin
+      filename="QuadMotorPlugin"
+      name="quad_motor_plugin::QuadMotorPlugin">
+
+      <thrust_topic>/quad/rotor_thrusts</thrust_topic>
+
+    </plugin>
+
+    <link name="base_link">
+      <!-- Approximate mass and inertia -->
+      <inertial>
+        <mass>1.5</mass>
+        <inertia>
+          <ixx>0.03</ixx>
+          <iyy>0.03</iyy>
+          <izz>0.05</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+
+      <!-- Main body visual -->
+      <visual name="body_visual">
+        <geometry>
+          <box>
+            <size>0.25 0.25 0.08</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.8 1</ambient>
+          <diffuse>0.2 0.2 0.8 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Main body collision -->
+      <collision name="body_collision">
+        <geometry>
+          <box>
+            <size>0.25 0.25 0.08</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- Arm in x direction -->
+      <visual name="arm_x_visual">
+        <geometry>
+          <box>
+            <size>0.8 0.04 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.1 0.1 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Arm in y direction -->
+      <visual name="arm_y_visual">
+        <geometry>
+          <box>
+            <size>0.04 0.8 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.1 0.1 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Four simple rotor visuals -->
+      <visual name="rotor_1_visual">
+        <pose>0.4 0.0 0.03 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.015</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.8 0.1 0.1 1</ambient>
+          <diffuse>0.8 0.1 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <visual name="rotor_2_visual">
+        <pose>-0.4 0.0 0.03 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.015</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.8 0.1 1</ambient>
+          <diffuse>0.1 0.8 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <visual name="rotor_3_visual">
+        <pose>0.0 0.4 0.03 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.015</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.8 0.1 0.1 1</ambient>
+          <diffuse>0.8 0.1 0.1 1</diffuse>
+        </material>
+
+      </visual>
+
+      <visual name="rotor_4_visual">
+        <pose>0.0 -0.4 0.03 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>
+            <length>0.015</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.8 0.1 1</ambient>
+          <diffuse>0.1 0.8 0.1 1</diffuse>
+        </material>
+      </visual>
+
+      <sensor name="imu_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>250</update_rate>
+        <topic>/simple_quadrotor/imu</topic>
+
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0005</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0005</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0005</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </link>
+  </model>
+</sdf>
